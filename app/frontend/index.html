@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OWASP Security Lab | Task Manager</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <p class="eyebrow">OWASP DEP-SCAN TRAINING ENVIRONMENT</p>
+      <h1>Security Lab Task Manager</h1>
+      <p class="subtitle">A full-stack practice application for learning dependency vulnerability scanning.</p>
+      <span id="api-status" class="pill">Checking backend…</span>
+    </header>
+    <section class="card">
+      <form id="task-form">
+        <label for="task-title">Add a task</label>
+        <div class="form-row">
+          <input id="task-title" maxlength="120" placeholder="e.g. Review CVE findings" required>
+          <button type="submit">Add task</button>
+        </div>
+      </form>
+      <div class="section-title"><h2>Your tasks</h2><span id="task-count">0 tasks</span></div>
+      <ul id="task-list"></ul>
+    </section>
+    <section class="info">
+      <h2>Why this app exists</h2>
+      <p>This training project intentionally uses outdated direct npm dependencies so OWASP dep-scan can demonstrate dependency analysis. Findings depend on the scanner version and vulnerability database.</p>
+      <p><strong>Safety:</strong> Keep this lab local. Do not expose it to the internet or reuse its outdated dependencies in production.</p>
+    </section>
+    <footer>Local security training project · OWASP dep-scan</footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

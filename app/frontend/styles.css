@@ -1,0 +1,27 @@
+* { box-sizing: border-box; }
+body { margin: 0; background: #f3f6fb; color: #182238; font: 16px/1.5 system-ui, sans-serif; }
+.container { width: min(820px, calc(100% - 32px)); margin: 58px auto; }
+header { margin-bottom: 26px; }
+.eyebrow { color: #5368c5; font-size: 12px; font-weight: 800; letter-spacing: .13em; }
+h1 { margin: 5px 0; font-size: clamp(32px, 6vw, 48px); line-height: 1.1; letter-spacing: -.04em; }
+.subtitle { color: #65718a; }
+.pill { display: inline-block; padding: 5px 11px; border-radius: 30px; background: #fff0d2; color: #805600; font-size: 13px; }
+.pill.online { background: #dcf7e7; color: #17633a; }
+.card, .info { background: white; border-radius: 16px; padding: 26px; box-shadow: 0 12px 38px #1d315010; margin-bottom: 18px; }
+label { display: block; font-weight: 700; margin-bottom: 8px; }
+.form-row { display: flex; gap: 10px; }
+input { flex: 1; min-width: 0; padding: 12px; border: 1px solid #d8deea; border-radius: 9px; font: inherit; }
+button { border: 0; border-radius: 9px; padding: 11px 17px; color: white; background: #4058c7; font-weight: 700; cursor: pointer; }
+.section-title { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; }
+h2 { font-size: 18px; margin: 0; }
+#task-count { color: #7b8598; font-size: 13px; }
+ul { list-style: none; padding: 0; margin: 12px 0 0; }
+li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 0; border-top: 1px solid #edf0f5; }
+li label { display: flex; align-items: center; gap: 10px; margin: 0; font-weight: 400; }
+li input { flex: none; width: 17px; height: 17px; accent-color: #4058c7; }
+.done { color: #929bad; text-decoration: line-through; }
+.delete { background: #fff0f0; color: #a33434; padding: 7px 11px; }
+.info { color: #59657a; font-size: 14px; }
+.info h2 { color: #182238; margin-bottom: 8px; }
+footer { color: #818b9d; text-align: center; font-size: 12px; margin-top: 24px; }
+@media (max-width: 520px) { .container { margin: 28px auto; } .card, .info { padding: 19px; } .form-row { flex-direction: column; } }

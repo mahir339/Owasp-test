@@ -1,13 +1,15 @@
 
-name: OWASP Dependency Security Scan
+name: OWASP Dependency Scan
 
 on:
   push:
     branches:
       - main
+
   pull_request:
     branches:
       - main
+
   workflow_dispatch:
 
 permissions:
@@ -20,50 +22,38 @@ jobs:
     timeout-minutes: 60
 
     steps:
-      - name: Checkout Repository
+      # 1. Checkout source code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Prepare Scan Directories
+      # 2. Prepare writable directories
+      - name: Prepare scan directories
         run: |
+          mkdir -p "$RUNNER_TEMP/dep-scan-vdb"
           mkdir -p reports
-          mkdir -p "$RUNNER_TEMP/depscan-vdb"
+          chmod 777 "$RUNNER_TEMP/dep-scan-vdb"
+          chmod 777 reports
 
-      - name: Cache Vulnerability Database
-        uses: actions/cache@v4
-        with:
-          path: ${{ runner.temp }}/depscan-vdb
-          key: depscan-vdb-app-v1
-          restore-keys: |
-            depscan-vdb-app-
-
-      - name: Pull OWASP dep-scan Image
+      # 3. Download OWASP dep-scan image
+      - name: Pull OWASP dep-scan image
         run: |
           docker pull ghcr.io/owasp-dep-scan/dep-scan:latest
 
-      - name: Download Application Vulnerability Database
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+      # 4. Run OWASP dependency scan
+      - name: Run OWASP dep-scan
         run: |
           docker run --rm \
             -e VDB_HOME=/db \
-            -e GITHUB_TOKEN="$GITHUB_TOKEN" \
-            -v "$RUNNER_TEMP/depscan-vdb:/db" \
-            ghcr.io/owasp-dep-scan/dep-scan:latest \
-            depscan-vdb download --scope app
-
-      - name: Run OWASP Dependency Scan
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          docker run --rm \
-            -e VDB_HOME=/db \
-            -e GITHUB_TOKEN="$GITHUB_TOKEN" \
-            -v "$RUNNER_TEMP/depscan-vdb:/db" \
             -v "$GITHUB_WORKSPACE:/app" \
+            -v "$RUNNER_TEMP/dep-scan-vdb:/db" \
             ghcr.io/owasp-dep-scan/dep-scan:latest \
-            depscan --src /app --reports-dir /app/reports
+            depscan \
+              --src /app \
+              --reports-dir /app/reports \
+              --vdb-scope app
 
-      - name: Upload OWASP Scan Reports
+      # 5. Upload scan reports
+      - name: Upload OWASP scan reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -71,3 +61,4 @@ jobs:
           path: reports/
           if-no-files-found: warn
           retention-days: 30
+

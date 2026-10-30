@@ -1,20 +1,74 @@
-# Node dependencies
+
+# ==============================
+# Node.js dependencies
+# ==============================
 node_modules/
 **/node_modules/
 
-# Environment variables
+# ==============================
+# Environment variables and secrets
+# ==============================
 .env
 .env.*
 !.env.example
+!.env.sample
 
-# Scan reports
-reports/*
-!reports/.gitkeep
+# ==============================
+# Python virtual environments
+# ==============================
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
 
+# ==============================
 # Logs
+# ==============================
+logs/
 *.log
 npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
 
-# OS files
+# ==============================
+# Build and distribution
+# ==============================
+dist/
+build/
+coverage/
+.nyc_output/
+
+# ==============================
+# Operating system files
+# ==============================
 .DS_Store
 Thumbs.db
+Desktop.ini
+
+# ==============================
+# IDE and editor files
+# ==============================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ==============================
+# Docker and temporary files
+# ==============================
+*.tar
+*.tmp
+*.temp
+
+# ==============================
+# OWASP dep-scan generated data
+# ==============================
+# Keep reports available for review and GitHub Actions artifacts.
+# Ignore only local vulnerability database/cache data.
+.vdb/
+vdb/
+
